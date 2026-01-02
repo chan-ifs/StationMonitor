@@ -1,0 +1,9 @@
+server:
+  port: "8080"
+
+mongodb:
+  url: "mongodb+srv://chanlk:chanlk@chanlkmongo.pmrroi3.mongodb.net/?appName=ChanlkMongo"
+
+jwt:
+  secret: "your-secret-key-change-in-production"
+

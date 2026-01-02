@@ -1,0 +1,12 @@
+server:
+  port: "8080"
+
+mongodb:
+  # Replace with your MongoDB Atlas connection string
+  # Format: mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority
+  url: "mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority"
+
+jwt:
+  # IMPORTANT: Change this to a secure random string in production!
+  secret: "your-secret-key-change-in-production"
+

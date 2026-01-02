@@ -1,0 +1,82 @@
+/* FontAwesome is not built-in, but used for icons */
+@import "@bryntum/gantt/fontawesome/css/fontawesome.css";
+@import "@bryntum/gantt/fontawesome/css/solid.css";
+
+/* Bryntum structural CSS */
+@import "@bryntum/gantt/gantt.css";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure Gantt container has proper height */
+.b-gantt {
+  height: 100%;
+  width: 100%;
+}
+
+.b-gantt-container {
+  height: 100%;
+  width: 100%;
+}
+
+.b-status-column-cell, .b-complexity-column-cell {
+    font-size : 0.8em;
+}
+
+.b-status-column-cell i::before, .b-complexity-column-cell i::before {
+    margin-inline-end : .5em;
+}
+
+.Started {
+    color : #bbb;
+}
+
+.Late {
+    color : #ff5722;
+}
+
+.Completed {
+    color : #34d844;
+}
+
+.Easy {
+    color : #69db7c;
+}
+
+.Normal {
+    color : #fdd835;
+}
+
+.Hard {
+    color : #ffa94d;
+}
+
+.filter-by-name label {
+    display : none;
+}
+
+.settings-menu .b-slider {
+    margin-bottom : 0.5em;
+}
+
