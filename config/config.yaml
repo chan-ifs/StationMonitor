@@ -11,6 +11,6 @@ google_oauth:
   # Get these from Google Cloud Console: https://console.cloud.google.com/apis/credentials
   # Create OAuth 2.0 Client ID credentials and add the redirect URL
   client_id: "411464711897-d53dkeugkd54p7gbibmbuh440d77f655.apps.googleusercontent.com"
-  client_secret: "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"
+  client_secret: ""
   # Redirect URL must match the one configured in Google Cloud Console
   redirect_url: "http://localhost:8080/api/auth/google/callback"
