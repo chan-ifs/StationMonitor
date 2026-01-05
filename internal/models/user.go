@@ -3,10 +3,14 @@ package models
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type User struct {
-	ID       primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	Email    string             `bson:"email" json:"email"`
-	Username string             `bson:"username,omitempty" json:"username,omitempty"`
-	Password string             `bson:"password" json:"-"` // Don't expose password in JSON
+	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	Email       string             `bson:"email" json:"email"`
+	Username    string             `bson:"username,omitempty" json:"username,omitempty"`
+	Password    string             `bson:"password,omitempty" json:"-"` // Don't expose password in JSON
+	GoogleID    string             `bson:"google_id,omitempty" json:"-"` // Google OAuth ID
+	Provider    string             `bson:"provider,omitempty" json:"provider,omitempty"` // "local" or "google"
+	Name        string             `bson:"name,omitempty" json:"name,omitempty"` // Full name from Google
+	Picture     string             `bson:"picture,omitempty" json:"picture,omitempty"` // Profile picture URL
 }
 
 type LoginRequest struct {
@@ -28,5 +32,9 @@ type RegisterResponse struct {
 	Token string `json:"token"`
 	User  User   `json:"user"`
 	Message string `json:"message"`
+}
+
+type GoogleOAuthRequest struct {
+	Code string `json:"code" binding:"required"`
 }
 

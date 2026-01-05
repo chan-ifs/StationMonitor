@@ -49,6 +49,22 @@ export const authService = {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   },
+  getGoogleAuthUrl: async () => {
+    const response = await api.get('/api/auth/google', {
+      params: {
+        redirect_url: `${window.location.origin}/auth/google/callback`
+      }
+    });
+    return response.data.auth_url;
+  },
+  handleGoogleCallback: async (code: string, state: string) => {
+    // Note: The backend callback endpoint expects query parameters
+    // We need to pass the redirect_uri that was used in the initial OAuth request
+    // This is the URL where Google redirected to (current page URL)
+    const redirectUri = `${window.location.origin}${window.location.pathname}`;
+    const response = await api.get(`/api/auth/google/callback?code=${code}&state=${state}&redirect_uri=${encodeURIComponent(redirectUri)}`);
+    return response.data;
+  },
 };
 
 export const dashboardService = {

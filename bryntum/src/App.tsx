@@ -27,6 +27,7 @@ const App: React.FC = () => {
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/auth/google/callback" element={<Login />} />
             <Route
               path="/dashboard"
               element={

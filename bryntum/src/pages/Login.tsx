@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Container,
   Paper,
@@ -11,6 +11,7 @@ import {
   CircularProgress,
   Tabs,
   Tab,
+  Divider,
 } from '@mui/material';
 import { authService } from '../services/api';
 
@@ -23,7 +24,55 @@ const Login: React.FC = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [googleOAuthAvailable, setGoogleOAuthAvailable] = useState(true);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // Function to handle Google OAuth callback
+  const handleGoogleCallback = async (code: string, state: string) => {
+    try {
+      setLoading(true);
+      setError('');
+      const response = await authService.handleGoogleCallback(code, state);
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+      // Redirect to dashboard
+      navigate('/dashboard', { replace: true });
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Google login failed');
+      setLoading(false);
+    }
+  };
+
+  // Handle Google OAuth callback - can receive either token (from backend redirect) or code/state (from Google)
+  useEffect(() => {
+    const token = searchParams.get('token');
+    const code = searchParams.get('code');
+    const state = searchParams.get('state');
+    const email = searchParams.get('email');
+    const name = searchParams.get('name');
+    
+    // If we have a token directly (backend redirected here), use it
+    if (token) {
+      setLoading(true);
+      localStorage.setItem('token', token);
+      
+      const user = {
+        email: email || '',
+        name: name || '',
+        provider: 'google'
+      };
+      localStorage.setItem('user', JSON.stringify(user));
+      
+      setTimeout(() => {
+        navigate('/dashboard', { replace: true });
+      }, 100);
+    } 
+    // If we have code and state (Google redirected here), exchange them for token
+    else if (code && state) {
+      handleGoogleCallback(code, state);
+    }
+  }, [searchParams, navigate]);
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -89,6 +138,25 @@ const Login: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const handleGoogleLogin = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const authUrl = await authService.getGoogleAuthUrl();
+      // Redirect to Google OAuth
+      window.location.href = authUrl;
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.message || err.response?.data?.error || 'Failed to initiate Google login';
+      setError(errorMessage);
+      // If OAuth is not configured, disable the button
+      if (errorMessage.includes('not configured') || err.response?.status === 400) {
+        setGoogleOAuthAvailable(false);
+      }
+      setLoading(false);
+    }
+  };
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -168,6 +236,38 @@ const Login: React.FC = () => {
               >
                 {loading ? <CircularProgress size={24} /> : 'Sign In'}
               </Button>
+              
+              {googleOAuthAvailable && (
+                <>
+                  <Divider sx={{ my: 2 }}>OR</Divider>
+                  
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    onClick={handleGoogleLogin}
+                    disabled={loading}
+                    sx={{
+                      mb: 2,
+                      backgroundColor: '#fff',
+                      color: '#757575',
+                      borderColor: '#dadce0',
+                      '&:hover': {
+                        backgroundColor: '#f8f9fa',
+                        borderColor: '#dadce0',
+                      },
+                    }}
+                    startIcon={
+                      <img
+                        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                        alt="Google"
+                        style={{ width: 18, height: 18 }}
+                      />
+                    }
+                  >
+                    Continue with Google
+                  </Button>
+                </>
+              )}
             </Box>
           )}
 

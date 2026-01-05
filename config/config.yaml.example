@@ -10,3 +10,10 @@ jwt:
   # IMPORTANT: Change this to a secure random string in production!
   secret: "your-secret-key-change-in-production"
 
+google_oauth:
+  # Get these from Google Cloud Console: https://console.cloud.google.com/apis/credentials
+  client_id: "your-google-client-id.apps.googleusercontent.com"
+  client_secret: "your-google-client-secret"
+  # Redirect URL must match the one configured in Google Cloud Console
+  redirect_url: "http://localhost:8080/api/auth/google/callback"
+
