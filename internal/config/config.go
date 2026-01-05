@@ -17,6 +17,11 @@ type Config struct {
 	JWT struct {
 		Secret string `yaml:"secret"`
 	} `yaml:"jwt"`
+	GoogleOAuth struct {
+		ClientID     string `yaml:"client_id"`
+		ClientSecret string `yaml:"client_secret"`
+		RedirectURL  string `yaml:"redirect_url"`
+	} `yaml:"google_oauth"`
 }
 
 func LoadConfig(path string) (*Config, error) {

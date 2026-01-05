@@ -29,6 +29,8 @@ func SetupRoutes(router *gin.Engine, db *mongo.Database) {
 	{
 		api.POST("/login", handlers.Login)
 		api.POST("/register", handlers.Register)
+		api.GET("/auth/google", handlers.GoogleOAuthLogin)
+		api.GET("/auth/google/callback", handlers.GoogleOAuthCallback)
 	}
 
 	// Protected routes
