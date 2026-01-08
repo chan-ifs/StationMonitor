@@ -52,6 +52,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/auth/google/callback" element={<Login />} />
           <Route
             path="/dashboard"
             element={

@@ -135,77 +135,131 @@ export async function getGanttData(name) {
     //   ganttTasks.push(ganttTask);
     //   ganttTasks.push(ganttTask2);
     // }
+
+
     // const ganttTasks = [];
     // console.log("ganttTasks");
-    //  console.log(ganttTasks);
-    //   for (let i = 0; i < apiTasks.length; i++) {
-    //     const n = i + 1;
-    //     const ganttTask = {
-    //         id: i + 1,
-    //             text: 'Project Planning',
-    //             start: new Date(2025, 11, 1, 8, 0), // December 1, 2025, 8:00 AM
-    //             end: new Date(2025, 11, 8, 17, 0), // December 8, 2025, 5:00 PM
-    //             type: 'summary',
-    //             open: false,
-    //             progress: 60,
-    //              };
-    //       ganttTasks.push(ganttTask);
-    //     const ganttTasks2 = {
-    //         id: i + 10,
-    //         text: 'Requirements Gathering',
-    //         start: new Date(2025, 11, 1, 8, 0),
-    //         end: new Date(2025, 11, 3, 17, 0),
-    //         parent: i + 1,
-    //         type: 'summary',
-    //         // open: true,
-    //               progress: 100,
-    //       };
-    //       ganttTasks.push(ganttTasks2);
-    //     }
+    // console.log(ganttTasks);
+    // for (let i = 0; i < apiTasks.length; i++) {
+    //   const n = i + 1;
+    //   const ganttTask = {
+    //     id: i + 1,
+    //     text: 'Project Planning',
+    //     // start: new Date(2025, 11, 1, 8, 0), // December 1, 2025, 8:00 AM
+    //     // end: new Date(2025, 11, 8, 17, 0), // December 8, 2025, 5:00 PM
+    //     start: apiTasks[i].start,
+    //     end: apiTasks[i].end,
+    //     type: 'summary',
+    //     open: false,
+    //     progress: 60,
+    //   };
+    //   ganttTasks.push(ganttTask);
+    //   const ganttTasks2 = {
+    //     id: i + 10,
+    //     text: 'Requirements Gathering',
+    //     // start: new Date(2025, 11, 1, 8, 0),
+    //     // end: new Date(2025, 11, 3, 17, 0),
+    //     start: apiTasks[i].start,
+    //     end: apiTasks[i].end,
+    //     parent: i + 1,
+    //     type: 'summary',
+    //     // open: true,
+    //     progress: 100,
+    //   };
+    //   ganttTasks.push(ganttTasks2);
+    // }
 
 
-        // const ganttdata = getData();
-        // const ganttTasks = ganttdata.tasks;
+    // const ganttdata = getData();
+    // const ganttTasks = ganttdata.tasks;
 
-    //     const ganttTasks = [];
+    // const ganttTasks = [];
     // console.log("ganttTasks");
-    //  console.log(ganttTasks);
-    //   for (let i = 0; i < 3; i++) {
-    //     const n = i + 1;
-    //     const ganttTask = {
-    //         id: i + 1,
-    //             text: 'Project Planning',
-    //             start: new Date(2025, 11, 1, 8, 0), // December 1, 2025, 8:00 AM
-    //             end: new Date(2025, 11, 8, 17, 0), // December 8, 2025, 5:00 PM
-    //             type: 'summary',
-    //             open: true,
-    //             progress: 60,
-    //              };
-    //       ganttTasks.push(ganttTask);
-    //     const ganttTasks2 = {
-    //         id: i + 10,
-    //         text: 'Requirements Gathering',
-    //         start: new Date(2025, 11, 1, 8, 0),
-    //         end: new Date(2025, 11, 3, 17, 0),
-    //         parent: i + 1,
-    //         type: 'summary',
-    //         progress: 100,
-    //       };
-    //       ganttTasks.push(ganttTasks2);
+    // console.log(ganttTasks);
+    // for (let i = 0; i < 3; i++) {
+    //   const n = i + 1;
+    //   const ganttTask = {
+    //     id: i + 1,
+    //     text: 'Project Planning',
+    //     start: new Date(2025, 11, 1, 8, 0), // December 1, 2025, 8:00 AM
+    //     end: new Date(2025, 11, 8, 17, 0), // December 8, 2025, 5:00 PM
+    //     type: 'summary',
+    //     open: true,
+    //     // progress: 0,
+    //     percentDone: 0,
+    //     startDate: new Date(2025, 11, 1, 8, 0),
+    //     endDate: new Date(2025, 11, 8, 17, 0),
+    //     expanded: true,
+
+    //   };
+    //   // ganttTasks.push(ganttTask);
+    //   const ganttTasks2 = {
+    //     id: i + 10,
+    //     text: 'Requirements Gathering',
+    //     start: new Date(2025, 11, 1, 8, 0),
+    //     end: new Date(2025, 11, 3, 17, 0),
+    //     parent: i + 1,
+    //     type: 'summary',
+    //     // progress: 0,
+    //     percentDone: 0,
+    //     startDate: new Date(2025, 11, 1, 8, 0),
+    //     endDate: new Date(2025, 11, 8, 17, 0),
+    //     expanded: true,
+
+    //   };
+    //   // ganttTasks.push(ganttTasks2);
+
+    //   const ganttTasks3 = {
+    //   id: i +1000,
+    //   name        : "Launch SaaS Product",
+    //   percentDone: 50,
+    //   startDate   : new Date(2025, 11, 1, 8, 0),
+    //   expanded: true,
+    //   endDate: new Date(2025, 11, 3, 17, 0),
+    //   baselines: [
+    //     {
+    //       startDate: new Date(2025, 11, 1, 8, 0),
+    //       endDate: new Date(2025, 11, 3, 17, 0),
+    //     },
+    //     {
+    //       startDate: new Date(2025, 11, 1, 8, 0),
+    //       endDate: new Date(2025, 11, 3, 17, 0),
+    //     },
+    //     {
+    //       startDate: new Date(2025, 11, 1, 8, 0),
+    //       endDate: new Date(2025, 11, 3, 17, 0),
     //     }
+    //   ]
+    // }
+    // ganttTasks.push(ganttTasks3);
+
+    // }
     // console.log("ganttTasks2");
-    // console.log(ganttTasks2);
-    // // Transform tasks using the same logic as useGanttTasks
+    // console.log(ganttTasks);
+
+
+    // Transform tasks using the same logic as useGanttTasks
     const ganttTasks = apiTasks.map(task => {
       const taskObj = {
         ...task,
         id: task.id,
         text: task.id + " - " + task.type + " - " + task.text,
         type: task.type,
-        progress: task.progress,
+        // progress: task.progress,
+        progress: 10,
         duration: task.duration,
-        start: toDate(task.start),
-        end: toDate(task.end),
+        // start: toDate(task.start),
+        // end: toDate(task.end),
+        start: new Date(2025, 11, 1, 8, 0),
+        end: new Date(2025, 11, 3, 17, 0),
+        expanded: true,
+
+        baselines: [
+          {
+            startDate: new Date(2025, 11, 1, 8, 0),
+            endDate: new Date(2025, 11, 3, 17, 0),
+          },
+        ],
       };
 
       // Only include parent if it exists and is not null/undefined
@@ -283,6 +337,8 @@ export const useGanttTasks = () => {
             duration: task.duration,
             start: toDate(task.start),
             end: toDate(task.end),
+            startDate: toDate(task.start),
+            endDate: toDate(task.end),
           };
 
           // Only include parent if it exists and is not null/undefined
